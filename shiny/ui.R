@@ -14,7 +14,8 @@ shinyUI(pageWithSidebar(
                     min = 1984, 
                     max = 2012 ,
                     step=1,
-                    value = c(2000,2010)
+                    value = c(2000,2010),
+                    format = "####"
     ),
         h3("Model Prediction Parameters"),
         selectInput("pred_hod", label="Hour of Day (Prediction):",
