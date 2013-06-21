@@ -9,6 +9,7 @@ shinyUI(pageWithSidebar(
     # Sidebar with a slider input for number of observations
     sidebarPanel(
         h3("Model Parameters"),
+        p("These parameters specify the range of input data used for the generalized linear model. Future developments will allow selection of various model formulae."),
         sliderInput("trend_range", 
                     "Date Range (Years)", 
                     min = 1984, 
@@ -18,6 +19,7 @@ shinyUI(pageWithSidebar(
                     format = "####"
     ),
         h3("Model Prediction Parameters"),
+        p("These parameters allow specification of fixed values used for the trend prediction (blue line and grey ribbon)."),
         selectInput("pred_hod", label="Hour of Day (Prediction):",
                     choices=list("00:00" = 0, 
                          "01:00" = 1, 
