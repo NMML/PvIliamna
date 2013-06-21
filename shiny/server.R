@@ -28,7 +28,7 @@ shinyServer(function(input, output) {
         p <- ggplot(data=pred_data) +
             geom_ribbon(aes(year,ymin=exp(yhat.fit-1.96*yhat.se.fit),ymax=exp(yhat.fit+1.96*yhat.se.fit)),alpha=0.2) +
             geom_line(aes(year,exp(yhat.fit)),color='blue') + 
-            geom_point(data=trend_data,aes(year,totalcount),size=5,position='jitter',alpha=0.5)
+            geom_point(data=trend_data,aes(year,totalcount),size=4,,alpha=0.3)
         print(p)
     },height=600)
     
