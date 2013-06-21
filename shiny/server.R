@@ -4,6 +4,7 @@ shinyServer(function(input, output) {
     trend_glm <- reactive({
         sub_index <- which(iliamna_years >= input$trend_range[1] & iliamna_years <= input$trend_range[2])
         data<-iliamna_grouped[sub_index,]
+        data$year<-as.integer(data$year)
         iliamna_glm<-glm(totalcount ~ year + doy + bs(hod),
                          data=data,family=quasipoisson(link="log"))
         return(iliamna_glm)
@@ -14,8 +15,8 @@ shinyServer(function(input, output) {
         d<-glm_obj$data
         y1<-input$trend_range[1]
         y2<-input$trend_range[2]
-        pred <- data.frame(year = y1:y2,hod=as.numeric(input$pred_hod),
-                           doy=as.numeric(input$pred_doy))
+        pred <- data.frame(year = y1:y2,hod=as.integer(input$pred_hod),
+                           doy=as.integer(input$pred_doy))
         pred <- transform(pred, yhat = predict(glm_obj, 
                                                newdata = pred,se.fit=TRUE))
         return(pred)
@@ -36,8 +37,8 @@ shinyServer(function(input, output) {
         summary(glmObj)
     })
     
-    output$input.print <- renderPrint({
-        pred_glm()
+    output$data_table <- renderTable({
+        trend_glm()$data
     })
 
 })
