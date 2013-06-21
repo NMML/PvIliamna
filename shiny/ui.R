@@ -45,8 +45,11 @@ shinyUI(pageWithSidebar(
     
     # Show a plot of the generated distribution
     mainPanel(
-        plotOutput("pred.plot"),
-        verbatimTextOutput("input.print"),
-        verbatimTextOutput("summary")
+        tabsetPanel(
+            tabPanel("Plot", plotOutput("pred.plot")),
+            tabPanel("Summary", verbatimTextOutput("summary")),
+            tabPanel("Data Table", tableOutput("data_table"))
+        )
+
     )
 ))
