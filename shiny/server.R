@@ -30,7 +30,7 @@ shinyServer(function(input, output) {
             geom_line(aes(year,exp(yhat.fit)),color='blue') + 
             geom_point(data=trend_data,aes(year,totalcount),size=5,position='jitter')
         print(p)
-    })
+    },height=600)
     
     output$summary <- renderPrint({
         glmObj <- trend_glm()

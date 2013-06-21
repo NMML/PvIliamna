@@ -8,13 +8,15 @@ shinyUI(pageWithSidebar(
     
     # Sidebar with a slider input for number of observations
     sidebarPanel(
+        h3("Model Parameters"),
         sliderInput("trend_range", 
-                    "Trend Range (Years)", 
+                    "Date Range (Years)", 
                     min = 1984, 
                     max = 2012 ,
                     step=1,
                     value = c(2000,2010)
     ),
+        h3("Model Prediction Parameters"),
         selectInput("pred_hod", label="Hour of Day (Prediction):",
                     choices=list("00:00" = 0, 
                          "01:00" = 1, 
@@ -46,7 +48,7 @@ shinyUI(pageWithSidebar(
     # Show a plot of the generated distribution
     mainPanel(
         tabsetPanel(
-            tabPanel("Plot", plotOutput("pred.plot")),
+            tabPanel("Plot", plotOutput("pred.plot",height="auto")),
             tabPanel("Summary", verbatimTextOutput("summary")),
             tabPanel("Data Table", tableOutput("data_table"))
         )
