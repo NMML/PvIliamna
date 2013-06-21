@@ -1,5 +1,8 @@
 library(lubridate)
 library(splines)
+library(plyr)
+library(shiny)
+library(ggplot2)
 
 PvGlmPredict<-function(glm_obj){
     d<-glm_obj$data
@@ -12,5 +15,11 @@ PvGlmPredict<-function(glm_obj){
     return(pred)
 }
 
-iliamna_counts <- read.csv('~/Arr/PvIliamna/data-open/Iliamna_HS_effort_count_weather.csv')
+iliamna_counts <- read.csv('data-open/Iliamna_HS_effort_count_weather.csv')
 iliamna_counts$datetime <- as.POSIXct(iliamna_counts$datetime,tz="US/Alaska")
+
+iliamna_counts$year <- as.numeric(format(iliamna_counts$datetime,"%Y"))
+iliamna_counts$hod <- as.numeric(format(iliamna_counts$datetime,"%H"))
+iliamna_counts$doy<-lubridate::yday(iliamna_counts$datetime)
+
+iliamna_grouped <- ddply(iliamna_counts,.(year,doy),summarize,totalcount = sum(nonpup_count,na.rm=TRUE),hod = mean(ifelse(hod==0,NA,hod)))

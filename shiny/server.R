@@ -1,36 +1,43 @@
-library(shiny)
-library(lubridate)
-library(splines)
-library(plyr)
-
-# Define server logic for slider examples
 shinyServer(function(input, output) {
-    
-    iliamna_years <- as.numeric(format(iliamna_counts$datetime,"%Y"))
-    
+    iliamna_years <- iliamna_grouped$year
     # Reactive expression to run the glm for given range of years
     trend_glm <- reactive({
         sub_index <- which(iliamna_years >= input$trend_range[1] & iliamna_years <= input$trend_range[2])
-        data<-iliamna_counts[sub_index,]
-        res<-glm(nonpup_count ~ year + doy + bs(hod),
-                 data=data,family=quasipoisson(link="log"))
+        data<-iliamna_grouped[sub_index,]
+        iliamna_glm<-glm(totalcount ~ year + doy + bs(hod),
+                         data=data,family=quasipoisson(link="log"))
+        return(iliamna_glm)
     }) 
     
-    # Generate a summary of the glm
+    pred_glm <- reactive({
+        glm_obj <- trend_glm()
+        d<-glm_obj$data
+        y1<-input$trend_range[1]
+        y2<-input$trend_range[2]
+        pred <- data.frame(year = y1:y2,hod=as.numeric(input$pred_hod),
+                           doy=as.numeric(input$pred_doy))
+        pred <- transform(pred, yhat = predict(glm_obj, 
+                                               newdata = pred,se.fit=TRUE))
+        return(pred)
+    })
+    
+    output$pred.plot <- renderPlot({
+        pred_data <- pred_glm()
+        trend_data <- trend_glm()$data
+        p <- ggplot(data=pred_data) +
+            geom_ribbon(aes(year,ymin=exp(yhat.fit-1.96*yhat.se.fit),ymax=exp(yhat.fit+1.96*yhat.se.fit)),alpha=0.2) +
+            geom_line(aes(year,exp(yhat.fit)),color='blue') + 
+            geom_point(data=trend_data,aes(year,totalcount),size=5,position='jitter')
+        print(p)
+    })
+    
     output$summary <- renderPrint({
         glmObj <- trend_glm()
         summary(glmObj)
     })
     
-    output$pred.table <- renderTable({
-        glmObj <- trend_glm()
-        pred <- PvGlmPredict(glmObj)
-        pred
+    output$input.print <- renderPrint({
+        pred_glm()
     })
-    
-    output$pred.plot <- renderPlot({
-        glmObj <- trend_glm()
-        pred <- PvGlmPredict(glmObj)
-        plot(glmObj$data$year,glmObj$data$nonpup_count)
-    })
+
 })
