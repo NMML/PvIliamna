@@ -5,7 +5,7 @@ shinyServer(function(input, output) {
         sub_index <- which(iliamna_years >= input$trend_range[1] & iliamna_years <= input$trend_range[2])
         data<-iliamna_grouped[sub_index,]
         data$year<-as.integer(data$year)
-        iliamna_glm<-glm(totalcount ~ year + doy + bs(hod),
+        iliamna_glm<-glm(totalcount ~ year + bs(doy) + bs(hod),
                          data=data,family=quasipoisson(link="log"))
         return(iliamna_glm)
     }) 
