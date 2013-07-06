@@ -14,4 +14,4 @@ LaTeX: XeLaTeX
 
 BuildType: Package
 PackagePath: pkg-source/PvIliamna
-PackageInstallArgs: --no-multiarch
+PackageInstallArgs: --no-multiarch --with-keep.source
