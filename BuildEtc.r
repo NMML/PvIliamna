@@ -5,12 +5,12 @@ library(roxygen2)
 roxygenize("spPlotSampCourse", roclets = c("namespace","rd"))
 
 # build R package in Linux
-cd "/media/Hitachi2GB/00NMML/ActiveRPack/PvIliamna_package/remote/pkg-source"
+cd "/media/Hitachi2GB/00NMML/ActiveRPack/PvIliamna_package/pkg-source"
 R CMD build PvIliamna
 R CMD INSTALL PvIliamna_1.0.tar.gz
 
 # knitr
-cd "/media/Hitachi2GB/00NMML/ActiveRPack/PvIliamna_package/inst/doc/jknit"
+cd "/media/Hitachi2GB/00NMML/ActiveRPack/PvIliamna_package/pkg-source/PvIliamna/inst/doc/jknit"
 R
 library(knitr)
 knit("trendPVA.Rnw")
@@ -23,7 +23,7 @@ knit("trendPVA.Rnw")
 #github cloud commits
 cd "/media/Hitachi2GB/00NMML/ActiveRPack/PvIliamna_package"
 git add .
-git commit -a -m 'add /inst/doc/jknit folder for Jays knitr documentation'
+git commit -a -m 'set up Jays knitr document'
 git push github.PvIliamna master
 git pull github.PvIliamna master
 

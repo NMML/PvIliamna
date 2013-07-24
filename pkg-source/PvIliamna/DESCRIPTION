@@ -1,9 +1,10 @@
-Package: anRpackage
+Package: PvIliamna
 Type: Package
-Title: What the package does (short line)
+Title: Trend Analysis for Iliamna Seals
 Version: 1.0
-Date: 2013-06-18
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Date: 2013-07-08
+LazyLoad: yes
+Author: Jay Ver Hoef and Josh London
+Maintainer: Jay Ver Hoef <jay.verhoef@noaa.gov>
+Description: Trend Analysis for Iliamna Seals
+License: GPL-2
