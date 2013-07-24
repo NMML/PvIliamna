@@ -10,30 +10,11 @@ R CMD build PvIliamna
 R CMD INSTALL PvIliamna_1.0.tar.gz
 
 # knitr
-cd "/media/Hitachi2GB/00NMML/RPackages/spPlotSampCourse_package/spPlotSampCourse/inst/doc/01Introduction"
+cd "/media/Hitachi2GB/00NMML/ActiveRPack/PvIliamna_package/inst/doc/jknit"
 R
 library(knitr)
-knit("Introduction.Rnw")
-cd "/media/Hitachi2GB/00NMML/RPackages/spPlotSampCourse_package/spPlotSampCourse/inst/doc/02IntroToSpatialStat"
-R
-library(knitr)
-knit("IntroToSpatialStat.Rnw")
-cd "/media/Hitachi2GB/00NMML/RPackages/spPlotSampCourse_package/spPlotSampCourse/inst/doc/03BlockPred"
-R
-library(knitr)
-knit("BlockPred.Rnw")
-cd "/media/Hitachi2GB/00NMML/RPackages/spPlotSampCourse_package/spPlotSampCourse/inst/doc/04BlockPredFinGrid"
-R
-library(knitr)
-knit("BlockPredFinGrid.Rnw")
-cd "/media/Hitachi2GB/00NMML/RPackages/spPlotSampCourse_package/spPlotSampCourse/inst/doc/05CountSamp"
-R
-library(knitr)
-knit("CountSamp.Rnw")
+knit("trendPVA.Rnw")
 
-# windows 32-bit using VirtualBox
-cd E:\00NMML\RPackages\spPlotSampCourse_package
-Rcmd INSTALL --build spPlotSampCourse
 
 #-------------------------------------------------------------------------------
 #                    GITHUB
@@ -42,7 +23,7 @@ Rcmd INSTALL --build spPlotSampCourse
 #github cloud commits
 cd "/media/Hitachi2GB/00NMML/ActiveRPack/PvIliamna_package"
 git add .
-git commit -a -m 'final push for course'
+git commit -a -m 'add /inst/doc/jknit folder for Jays knitr documentation'
 git push github.PvIliamna master
 git pull github.PvIliamna master
 
