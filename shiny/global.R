@@ -37,3 +37,8 @@ iliamna_grouped$year <- as.integer(iliamna_grouped$year)
 iliamna_grouped$hod <- as.integer(iliamna_grouped$hod)
 iliamna_grouped$doy <- as.integer(iliamna_grouped$doy)
 iliamna_grouped$data_source <- factor(iliamna_grouped$data_source,levels=c('NOAA-NMML','Pebble-ABR','ADFG','Mathisen-Kline'))
+
+iliamna_pups <- ddply(iliamna_counts,.(datetime,doy,data_source),summarize,puptotals = sum(pup_count,na.rm=TRUE),hod = mean(ifelse(hod==0,NA,hod)))
+iliamna_pups$hod <- as.integer(iliamna_pups$hod)
+iliamna_pups$doy <- as.integer(iliamna_pups$doy)
+iliamna_pups$data_source <- factor(iliamna_pups$data_source,levels=c('NOAA-NMML','Pebble-ABR','ADFG','Mathisen-Kline'))

@@ -32,6 +32,12 @@ shinyServer(function(input, output) {
         print(p)
     },height=600)
     
+    output$pup.plot <- renderPlot({
+        p <- ggplot(data=iliamna_pups) +
+            geom_point(aes(doy,puptotals,colour=data_source),size=4,,alpha=0.3)
+        print(p)
+    },height=600)
+    
     output$summary <- renderPrint({
         glmObj <- trend_glm()
         summary(glmObj)

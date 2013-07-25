@@ -53,7 +53,8 @@ shinyUI(pageWithSidebar(
         tabsetPanel(
             tabPanel("Plot", plotOutput("pred.plot",height="auto")),
             tabPanel("Summary", verbatimTextOutput("summary")),
-            tabPanel("Data Table", tableOutput("data_table"))
+            tabPanel("Data Table", tableOutput("data_table")),
+            tabPanel("Pup Counts", plotOutput("pup.plot",height="auto"))
         )
 
     )
