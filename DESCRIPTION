@@ -1,4 +1,4 @@
-Package: pviliamna
+Package: PvIliamna
 Title: Collection of data related to harbor seal counts in Lake Iliamna, Alaska
 Version: 0.1
 Authors@R: 'Josh M London <josh.london@noaa.gov> [aut,cre]'

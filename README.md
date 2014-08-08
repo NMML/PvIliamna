@@ -19,14 +19,14 @@ The R data package can be installed via `devtools` and the `install_github()` fu
 
 ```r
 install.packages("devtools")
-devtools::install_github("pviliamna", "NMML")
+devtools::install_github("PvIliamna", "NMML")
 ```
 
 A develop branch is maintained for active development of this repository. To install the develop branch instead of the master (default), add `ref="develop"`
 
 ```r
 install.packages("devtools")
-devtools::install_github("pviliamna", "NMML", ref="develop")
+devtools::install_github("PvIliamna", "NMML", ref="develop")
 ```
 
 Data Sources
