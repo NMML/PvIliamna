@@ -1,4 +1,4 @@
-Package: pviliamna_data
+Package: pviliamna
 Title: Collection of data related to harbor seal counts in Lake Iliamna, Alaska
 Version: 0.1
 Authors@R: 'Josh M London <josh.london@noaa.gov> [aut,cre]'
@@ -7,8 +7,6 @@ Description: This package contains time series count data and supporting
     archived data and data citations for ADFG, ABR, etc to be added here.)
 Depends:
     R (>= 3.1.0)
-Imports:
-    shiny
 License: GPL-3
 LazyData: true
 URL: http://github.com/jmlondon/pviliamna

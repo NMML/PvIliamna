@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^data-meta$
 ^data-archive$
+^data-create$
+^data-open$
