@@ -5,8 +5,10 @@ Authors@R: 'Josh M London <josh.london@noaa.gov> [aut,cre]'
 Description: This package contains time series count data and supporting
     information for harbor seals in Lake Iliamna, Alaska, USA. (Final links to
     archived data and data citations for ADFG, ABR, etc to be added here.)
-Depends:
+Depends: 
     R (>= 3.1.0)
 License: GPL-3
 LazyData: true
 URL: http://github.com/jmlondon/pviliamna
+Suggests: knitr
+VignetteBuilder: knitr
