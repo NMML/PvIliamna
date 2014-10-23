@@ -1,58 +1,112 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "PvIliamna: An R package of data related to harbor seal counts in Lake Iliamna, Alaska"
+author: Josh M. London, Kym M. Yano, and David E. Withrow
+authors:
+- name: Josh M. London
+  orcid: 0000-0002-3647-5046
+  affiliation: National Marine Mammal Laboratory, Alaska Fisheries Science Center, NOAA, Seattle, WA, USA
+- name: Kym M. Yano
+  affiliation: National Marine Mammal Laboratory, Alaska Fisheries Science Center, NOAA, Seattle, WA, USA
+- name: Dave E. Withrow
+  affiliation: National Marine Mammal Laboratory, Alaska Fisheries Science Center, NOAA, Seattle, WA, USA
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+fig_caption: yes
+bibliography: pviliamna.bib
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{"PvIliamna: An R package of data related to harbor seal counts in Lake Iliamna, Alaska"}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-## Vignette Info
-
-Note the various macros within the `vignette` setion of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r,echo=FALSE, message=FALSE}
+library(dplyr)
+library(PvIliamna)
+library(lubridate)
+data(iliamna_totalcounts)
+data(iliamna_waypoints)
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+This R data package was created in support of the following manuscript
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+> Ver Hoef, Jay M., P.L. Boveng, D.E. Withrow, and J.M. London. TBD. A Bayesian Analysis of Abundance, Trend and Population Viability for Harbor Seals in Iliamna Lake, Alaska.
+(currently in prep/review; updated citation and DOI will be provided when published)
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+This R data package and associated vignette document should be cited as
 
-## More Examples
+> London, Josh M., K.M. Yano, and D.E. Withrow. 2014. PvIliamna: An R package of data related to harbor seal counts in Lake Iliamna, Alaska.
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+## Executive Summary
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+This R data package provides an interface for accessing harbor seal aerial survey data from Iliamna Lake, Alaska, USA. The data have been collated from three previously published sources [@Mathisen1992Har; @Small2001Aer; @ABR2011Cha] and newly available data from the NOAA National Marine Mammal Laboratory. The survey years range between `r year(min(iliamna_totalcounts$datetime))` and `r year(max(iliamna_totalcounts$datetime))`. Counts are reported as summed totals across all identified waypoints in the lake for each survey date. In addition, the package provides a *SpatialPointsDataFrame* of all identified harbor seal waypoints in the lake. These waypoints have been collated across all of the surveys into a naming scheme consistent with current NMML Alaska statewide harbor seal protocols.
+
+## Methods and Data Collection
+
+The NOAA National Marine Mammal Laboratory (NMML) (Alaska Fisheries Science Center, Seattle, Washington, USA) conducted aerial surveys of Iliamna Lake between 2008 and 2013. Surveys were conducted as part of annual harbor seal survey effort and in collaboration with local community participants and researchers at the University of Alaska. Surveys were flown using high wing, twin engine aircraft (Aero Commander 680, 690 or a de Havilland Twin Otter). Survey altitude was generally 330 m and at an aircraft speed of 120 kts. These abundance surveys were performed several times yearly for most years between 2008 and 2013. Surveys were timed so that one survey was conducted while the lake was mostly frozen (Late March/early April), one during pupping (mid July), and often several during the August molt, when the greatest number of seals typically haul out on shore and are visible to aerial observers. Surveys were flown, weather allowing, in the mid- to late-afternoon, when the number of seals hauled out was expected to be highest. Aircraft flight track was recorded by GPS and all seals sighted were digitally photographed using a high resolution digital SLR camera with a telephoto zoom lens (up to 400mm). Time, date, latitude, longitude, and altitude were automatically imbedded into the image metadata or georeferenced post survey using the GPS track and software ([RoboGeo](http://www.robogeo.com/home/)).
+
+The total number of seals hauled out were counted from the digital photographs and recorded for each identified site. Pups were determined by their smaller size, and close proximity (less than 1 body length; either nursing or laying right next) to a larger seal. Pups were no longer recorded beyond about mid-August when many have been weaned. At this point the pups have grown so large that they cannot reliably be distinguished from other non-adult seals. In 2009, a collaborative effort between NMML and researchers from the Newhalen village provided 10 additional surveys and similar techniques were used. Aerial surveys were authorized under a Marine Mammal Protection Act General Authorization (LOC No. 14590) issued to the NMML.
+
+Between 2005 and 2007, ABR, Inc. Environmental Research and Services conducted a series of aerial surveys for harbor seals in Iliamna Lake [@ABR2011Cha]. In addition, earlier counts from surveys conducted by ADFG [@Small2001Aer] and a 1991 census by Mathisen & Kline [@Mathisen1992Har] were incorporated into the dataset to expand the historical reach. Geographic coordinates were provided (or, when not provided, determined based on descriptions or phyiscial maps) for each survey site and these sites were compared and merged with locations identified by NMML. In some cases, sites in very close geographic proximity were combined into a single site.  
+
+The following table summarizes the aerial survey effort across the various agencies and researchers.
+
+```{r sum-table,results='asis',echo=FALSE,message=FALSE}
+library(knitr)
+
+counts_df <- tbl_df(iliamna_totalcounts)
+
+by_agency_year <- group_by(counts_df,data_source = agency,year = as.factor(year(datetime)))
+by_agency_year <- arrange(by_agency_year,agency,year(datetime))
+sum_tbl <- summarize(by_agency_year,
+          first_survey = as.character(min(as.Date(datetime))),
+          last_survey = as.character(max(as.Date(datetime))),
+          n_surveys = n())
+names(sum_tbl) <- c("Data Source","Year","First Survey","Last Survey","No. of Surveys")
+
+kable(sum_tbl,caption = c('Summary of Lake Iliamna aerial surveys conducted across various agencies and researchers'), include.rownames=FALSE)
 ```
 
-Also a quote using `>`:
+## Count Data
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+The *iliamna_totalcounts* data frame (`data(iliamna_totalcounts)`) provides counts (n=`r nrow(iliamna_totalcounts)`) and observed weather conditions for each survey date. Both total number of adult seals (*adulttotal*) and total number of identified pups (*puptotal*) are provided when available. *puptotal* is recorded as `NA` when adults and pups were not distinguished. In these cases, the *adulttotal* value is presumed to include pups. In addition to the seal count inforamtion, each record includes observed weather variables (*airtemp* (in ranges of degrees F), *windspeed* (in ranges of miles per hour), *winddirection* (cardinal), and descriptive categories for *skycondition* and *precip*). The *datetime* values correspond to local Alaska time.
+
+## Haulout Locations
+
+```{r haul-out-map, echo=FALSE,message=FALSE,warning=FALSE,out.extra='style="float:left;"',fig.cap='Location of harbor seal haul-out sites in Iliamna Lake, Alaska'}
+library(ggmap)
+
+wpts <- as(iliamna_waypoints, 'data.frame')
+
+il_base <- get_map(location=c(lon=median(wpts$x),lat=median(wpts$y)),
+                   maptype="terrain", color="bw")
+
+p <- ggmap(il_base,extent="device") + geom_point(data=wpts, aes(x=x,y=y,colour="red"), size=3,show_guide=FALSE) + geom_point(data=wpts,aes(x=x,y=y),size=1)
+p
+```
+
+Geographic coordinates of known harbor seal haul-out locations in Iliamna Lake are provided in the *SpatialPointsDataFrame* object *iliamna_waypoints* (`data(iliamna_waypoints)`). The coordinate values (*x*,*y*) correspond to WGS84 longitude and latitude values(PROJ.4: `r proj4string(iliamna_waypoints)`).
+
+Coordinates of haul-out locations from previous surveys were overlayed with the NMML harbor seal haul-out sites. Haul-out locations were compared and sites were either added to the database or determined to be equivical. The naming scheme used for the NMML statewide database of harbor seal haul-out locations was then applied to the final set of waypoints. Waypoint names are provided in the *wptid* character value.
+
+Use of these haul-out locations has not been consistent across all years or, even seasonally, within years. Since data are reported as a sum total of all seals counted on a given survey, we presume all known haul-out locations were flown and 0 counts at a site were recorded or appropriately accounted for. 
+
+## Data Availability
+
+This R package and the data within it are publicly available and intended to be compliant with OMB memorandum [M-13-13 “Open Data Policy-Managing Information as an Asset.”](http://project-open-data.github.io/policy-memo/). The package is currently in development in support of the referenced Ver Hoef et al manuscript (and corresponding analysis package). During this time, the R package source code (of which this vignette is a component) is available at [https://github.com/NMML/PvIliamna](https://github.com/NMML/PvIliamna). Just prior to submitting the manuscript for review, a release will be created within the GitHub repository and archived at [figshare](http://figshare.com). At this time a digital object identifier (DOI) will also be minted.
+
+At any time, the latest version of this package can be installed using `devtools::install_github()'
+
+```{r install-github-example,eval=FALSE}
+library(devtools)
+devtools::install_github("NMML/PvIliamna")
+```
+
+Within the repository, the directory *data-open* provides open and accesible versions of the data in the form of a comma-separated plain text file and a geoJSON file ([iliamna_totalcounts.csv](https://github.com/NMML/PvIliamna/blob/master/data-open/iliamna_totalcounts.csv); [iliamna_waypoints.geojson](https://github.com/NMML/PvIliamna/blob/master/data-open/iliamna_waypoints.geojson)). We plan to archived these open formats at a NOAA data center and make them available for direct download.
+
+Compliant [Common Core metadata](http://project-open-data.github.io/schema/) is available within the package via
+
+```{r metadata-print, eval=FALSE}
+library(rjsonlite)
+fromJSON(system.file("metadata", "PvIliamna_CommonCore.json", package="PvIliamna"))
+```
+## References Cited
