@@ -1,14 +1,25 @@
 Package: PvIliamna
-Title: Collection of data related to harbor seal counts in Lake Iliamna, Alaska
+Title: An R package of data related to harbor seal counts in Lake Iliamna,
+    Alaska
 Version: 0.1
 Authors@R: 'Josh M London <josh.london@noaa.gov> [aut,cre]'
-Description: This package contains time series count data and supporting
-    information for harbor seals in Lake Iliamna, Alaska, USA. (Final links to
-    archived data and data citations for ADFG, ABR, etc to be added here.)
-Depends: 
+Description: This R data package provides an interface for accessing harbor
+    seal aerial survey data from Iliamna Lake, Alaska, USA. The data have been
+    collated from three previously published sources (Mathisen and Kline 1992;
+    Small 2001; ABR 2011 ... see vignette for full citations) and newly
+    available data from the NOAA National Marine Mammal Laboratory (NMML). The
+    survey years range between 1984 and 2013. Counts are reported as summed
+    totals across all identified waypoints in the lake for each survey date. In
+    addition, the package provides a SpatialPointsDataFrame of all identified
+    harbor seal waypoints in the lake. These waypoints have been collated
+    across all of the surveys into a naming scheme consistent with current NMML
+    Alaska statewide harbor seal protocols.
+Depends:
     R (>= 3.1.0)
 License: GPL-3
 LazyData: true
 URL: http://github.com/jmlondon/pviliamna
-Suggests: knitr
+Suggests:
+    knitr,
+    sp
 VignetteBuilder: knitr

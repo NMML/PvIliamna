@@ -1,6 +1,5 @@
-#' Lake Iliamna Harbor Seal Haul-out Locations
-#'
-#' Assembled and collated by NMML.
+#' =Harbor Seal Haul-out Locations, Iliamna Lake
+
 #' 
 #' @name iliamna_waypoints
 #' @format
@@ -9,5 +8,4 @@
 #' \item{latitude,longitude}{Location of the waypoint; geographic coordinates, WGS84}
 #' }
 #' @docType data
-#' @source \url{http://data.noaa.gov}
 "iliamna_waypoints"

@@ -1,6 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\*.yaml$
 ^data-meta$
 ^data-archive$
 ^data-create$
 ^data-open$
+^inst/doc$

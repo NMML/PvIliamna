@@ -9,14 +9,16 @@ iliamna_totalcounts <- read.csv("data-open/iliamna_totalcounts.csv",
                                 stringsAsFactors = FALSE)
 
 iliamna_totalcounts <- transmute(iliamna_totalcounts,
-       datetime <- ymd_hms(datetime, tz="America/Anchorage"),
-       agency <- as.factor(agency),
-       observer <- as.factor(observer),
-       airtemp <- as.factor(airtemp),
-       windspeed <- as.factor(windspeed),
-       winddirection <- as.factor(winddirection),
-       skycondition <- as.factor(skycondition),
-       precip <- as.factor(precip)
+       datetime = ymd_hms(datetime, tz="America/Anchorage"),
+       agency = as.factor(agency),
+       observer = as.factor(observer),
+       adulttotal,puptotal,
+       airtemp = as.factor(airtemp),
+       windspeed = as.factor(windspeed),
+       winddirection = as.factor(winddirection),
+       skycondition = as.factor(skycondition),
+       precip = as.factor(precip),
+       notes = as.character(notes)
        )
 
 save(iliamna_totalcounts, file = "data/iliamna_totalcounts.rdata")
