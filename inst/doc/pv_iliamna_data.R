@@ -33,7 +33,11 @@ p
 
 ## ----install-github-example,eval=FALSE-----------------------------------
 #  library(devtools)
-#  devtools::install_github("NMML/PvIliamna")
+#  devtools::install_github("PvIliamna","NMML")
+
+## ----install-github-dev,eval=FALSE---------------------------------------
+#  install.packages("devtools")
+#  devtools::install_github("PvIliamna", "NMML", ref="develop")
 
 ## ----metadata-print, eval=FALSE------------------------------------------
 #  library(rjsonlite)

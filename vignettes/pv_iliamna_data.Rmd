@@ -98,7 +98,14 @@ At any time, the latest version of this package can be installed using `devtools
 
 ```{r install-github-example,eval=FALSE}
 library(devtools)
-devtools::install_github("NMML/PvIliamna")
+devtools::install_github("PvIliamna","NMML")
+```
+
+A develop branch is maintained for active development of this repository. To install the develop branch instead of the master (default), add `ref="develop"`
+
+```{rinstall-github-dev,eval=FALSE}
+install.packages("devtools")
+devtools::install_github("PvIliamna", "NMML", ref="develop")
 ```
 
 Within the repository, the directory *data-open* provides open and accesible versions of the data in the form of a comma-separated plain text file and a geoJSON file ([iliamna_totalcounts.csv](https://github.com/NMML/PvIliamna/blob/master/data-open/iliamna_totalcounts.csv); [iliamna_waypoints.geojson](https://github.com/NMML/PvIliamna/blob/master/data-open/iliamna_waypoints.geojson)). We plan to archived these open formats at a NOAA data center and make them available for direct download.
@@ -109,4 +116,5 @@ Compliant [Common Core metadata](http://project-open-data.github.io/schema/) is 
 library(rjsonlite)
 fromJSON(system.file("metadata", "PvIliamna_CommonCore.json", package="PvIliamna"))
 ```
+
 ## References Cited
