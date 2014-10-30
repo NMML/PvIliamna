@@ -10,7 +10,7 @@ iliamna_totalcounts <- read.csv("data-open/iliamna_totalcounts.csv",
 
 iliamna_totalcounts <- transmute(iliamna_totalcounts,
        datetime = ymd_hms(datetime, tz="America/Anchorage"),
-       agency = as.factor(agency),
+       datasource = as.factor(datasource),
        observer = as.factor(observer),
        adulttotal,puptotal,
        airtemp = as.factor(airtemp),
