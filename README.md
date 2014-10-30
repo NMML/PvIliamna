@@ -54,8 +54,9 @@ Data Sources
 Data included in this repository were provided by
 * NOAA Alaska Fisheries Science Center National Marine Mammal Laboratory
 * Alaska Department of Fish & Game
-* Pebble Partnership
+* ABR Inc. Environmental Research & Services
 * Ole Mathisen, Thomas Kline and the University of Alaska Fairbanks
+* Newhalen Tribal Council
 
 Full Data Citations
 -------------------
@@ -65,3 +66,5 @@ ABR Inc. Environmental Research & Services. 2011. Chapter 16. Wildlife and Habit
 Mathisen, Ole A., and Thomas C. Kline. 1992. “Harbor Seals in Iliamna Lake, Bristol Bay, Alaska.” Report JCFOS 9204. Juneau Center for Fisheries; Ocean Sciences, University of Alaska Fairbanks.
 
 Small, Robert J. 2001. “Aerial Surveys of Harbor Seals in Southern Bristol Bay, Alaska, 1998-1999.” Book Section. In Harbor Seal Investigations in Alaska, Annual Report. NOAA Grant NA87FX0300, 71–83. Anchorage, AK: Alaska Department of Fish & Game.
+
+Newhalen Tribal Council. Iliamna Harbor Seal Survey Counts, 2009 (raw data provided to NOAA/NMML). PO Box 207 Newhalen, AK. (907) 571-1410. newhalentribal@yahoo.com.
